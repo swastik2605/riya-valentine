@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Riya 💖 Will You Be My Valentine?</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            margin: 0;
+            height: 100vh;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            animation: fadeIn 1.5s ease;
+        }
+
+        h1 {
+            color: #ff4d6d;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #555;
+            font-size: 16px;
+        }
+
+        .buttons {
+            margin-top: 25px;
+            position: relative;
+            height: 120px;
+        }
+
+        button {
+            padding: 12px 25px;
+            border-radius: 30px;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: absolute;
+        }
+
+        #yesBtn {
+            background: #ff4d6d;
+            color: white;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 0;
+        }
+
+        #yesBtn:hover {
+            transform: translateX(-50%) scale(1.1);
+        }
+
+        #noBtn {
+            background: #ddd;
+            color: #333;
+            right: 10%;
+            top: 0;
+        }
+
+        .message {
+            display: none;
+            animation: fadeIn 1s ease;
+        }
+
+        .heart {
+            font-size: 40px;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        .confetti {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    top: -10px;
+    animation: fall linear forwards;
+    z-index: 9999;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(110vh) rotate(720deg);
+        opacity: 0;
+    }
+}
+input:focus {
+    outline: none;
+    border-color: #ff4d6d;
+}
+.secret-container {
+    position: relative;
+}
+
+.side-photo {
+    position: absolute;
+    top: 50%;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    transform: translateY(-50%);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    animation: fadeIn 1.5s ease;
+}
+
+.side-photo.left {
+    left: -50px;
+}
+
+.side-photo.right {
+    right: -50px;
+}
+
+@media (max-width: 480px) {
+    .side-photo {
+        width: 70px;
+        height: 70px;
+    }
+
+    .side-photo.left {
+        left: -35px;
+    }
+
+    .side-photo.right {
+        right: -35px;
+    }
+}
+
+
+        
+    </style>
+</head>
+<body>
+
+<div class="card" id="mainCard">
+    <h1>Riya 💕</h1>
+    <p>
+        From the moment you came into my life,<br>
+        everything became more beautiful 💫<br><br>
+        Will you be my Valentine? 🌹
+    </p>
+
+    <div class="buttons">
+        <button id="yesBtn">YES 💖</button>
+        <button id="noBtn">NO 🙃</button>
+    </div>
+</div>
+
+<div class="card message" id="yesMessage">
+    <div class="heart">❤️</div>
+    <h1>YAYYYY RIYA!!! 💕</h1>
+    <p>
+        You just made my heart the happiest place on earth 😭💖<br><br>
+        Thank you for choosing me.<br>
+        Thank you for being YOU.<br><br>
+        I promise to make you smile,<br>
+        laugh a little louder,<br>
+        and love you a little deeper — every single day 💫<br><br>
+        Happy Valentine’s Day, my favorite person 🌹
+    </p>
+</div>
+<div class="card message" id="secretLock">
+    <h1>🔐 One Last Thing, Riya</h1>
+    <p>
+        This message is locked 💌<br>
+        Only YOU can unlock it.
+    </p>
+
+    <p style="font-size:14px;color:#777;">
+        Hint: It’s something very close to you 😉
+    </p>
+
+    <input 
+        type="text" 
+        id="secretInput" 
+        placeholder="Enter secret word"
+        style="padding:10px;border-radius:20px;border:1px solid #ccc;width:80%;text-align:center;"
+    >
+
+    <br><br>
+
+    <button onclick="unlockSecret()" 
+        style="background:#ff4d6d;color:white;padding:10px 25px;border:none;border-radius:30px;">
+        Unlock 💖
+    </button>
+
+    <p id="errorMsg" style="color:red;display:none;margin-top:10px;">
+        Nope 😝 Try again, beautiful
+    </p>
+</div>
+<div class="card message" id="secretMessage">
+    <div class="secret-container">
+
+        <!-- Left photo -->
+        <img src="riya.jpeg" alt="Riya" class="side-photo left">
+
+        <!-- Right photo -->
+        <img src="riya2.jpeg" alt="Riya" class="side-photo right">
+
+        <div class="heart">💖</div>
+        <h1>For You, Riya</h1>
+        <p>
+            If you’re reading this,<br>
+            it means you unlocked my heart too 🥹❤️<br><br>
+
+            Loving you is my favorite feeling.<br>
+            Choosing you is my easiest decision.<br><br>
+
+            No matter where life takes us,<br>
+            I promise to stand by you,<br>
+            laugh with you,<br>
+            and love you — always 💫<br><br>
+
+            You’re not just my Valentine.<br>
+            You’re my forever 💍
+        </p>
+
+    </div>
+</div>
+
+
+
+<div class="card message" id="noMessage">
+    <h1>Wait… 😢</h1>
+    <p id="noText"></p>
+    <button onclick="goBack()" style="margin-top:20px;background:#ff4d6d;color:white;">
+        Okay okay… I choose YES 💖
+    </button>
+</div>
+
+<script>
+    const noBtn = document.getElementById("noBtn");
+    const mainCard = document.getElementById("mainCard");
+    const yesMessage = document.getElementById("yesMessage");
+    const noMessage = document.getElementById("noMessage");
+    const noText = document.getElementById("noText");
+
+    const funnyReasons = [
+        "Because saying NO to me is illegal in my heart 💔😌",
+        "Because I already imagined our Valentine’s Day together 🥹🌹",
+        "Because I smile like an idiot whenever you text me 💕",
+        "Because my day feels incomplete without you 💫",
+        "Because destiny already shipped us 😏❤️"
+    ];
+
+    noBtn.addEventListener("mouseover", moveNoButton);
+    noBtn.addEventListener("click", showNoMessage);
+
+    function moveNoButton() {
+        const x = Math.random() * 200 - 100;
+        const y = Math.random() * 200 - 100;
+        noBtn.style.transform = `translate(${x}px, ${y}px)`;
+    }
+
+    function showNoMessage() {
+        mainCard.style.display = "none";
+        noMessage.style.display = "block";
+        noText.innerText = funnyReasons[Math.floor(Math.random() * funnyReasons.length)];
+    }
+
+   document.getElementById("yesBtn").addEventListener("click", () => {
+    mainCard.style.display = "none";
+    yesMessage.style.display = "block";
+    createConfetti();
+
+    setTimeout(() => {
+        yesMessage.style.display = "none";
+        document.getElementById("secretLock").style.display = "block";
+    }, 2500); // 2.5 sec celebration first 💖
+});
+
+
+
+    function goBack() {
+    noMessage.style.display = "none";
+    document.getElementById("secretLock").style.display = "block";
+}
+
+    function createConfetti() {
+    const colors = ["#ff4d6d", "#ffafcc", "#ffc8dd", "#cdb4db", "#ffd166"];
+
+    for (let i = 0; i < 120; i++) {
+        const confetti = document.createElement("div");
+        confetti.classList.add("confetti");
+
+        confetti.style.left = Math.random() * window.innerWidth + "px";
+        confetti.style.backgroundColor =
+            colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.animationDuration = Math.random() * 2 + 2 + "s";
+        confetti.style.opacity = Math.random();
+
+        document.body.appendChild(confetti);
+
+        setTimeout(() => confetti.remove(), 4000);
+    }
+}
+const secretWord = "riya"; // 🔑 CHANGE THIS IF YOU WANT
+
+function unlockSecret() {
+    const input = document.getElementById("secretInput").value.toLowerCase();
+    const error = document.getElementById("errorMsg");
+
+    if (input === secretWord) {
+        document.getElementById("secretLock").style.display = "none";
+        document.getElementById("secretMessage").style.display = "block";
+        error.style.display = "none";
+        createConfetti(); // 🎉 celebrate unlocking
+    } else {
+        error.style.display = "block";
+    }
+}
+
+
+</script>
+
+</body>
+</html>
